@@ -1,3 +1,7 @@
+output "eventgrid_system_topics_id" {
+  description = "Map of id values across all eventgrid_system_topics, keyed the same as var.eventgrid_system_topics"
+  value       = { for k, v in azurerm_eventgrid_system_topic.eventgrid_system_topics : k => v.id }
+}
 output "eventgrid_system_topics_identity" {
   description = "Map of identity values across all eventgrid_system_topics, keyed the same as var.eventgrid_system_topics"
   value       = { for k, v in azurerm_eventgrid_system_topic.eventgrid_system_topics : k => v.identity }
