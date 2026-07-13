@@ -28,14 +28,6 @@ EOT
       type         = string
     }))
   }))
-  validation {
-    condition = alltrue([
-      for k, v in var.eventgrid_system_topics : (
-        length(v.topic_type) > 0
-      )
-    ])
-    error_message = "must not be empty"
-  }
   # --- Unconfirmed validation candidates, derived from azurerm_eventgrid_system_topic's provider source ---
   # Not auto-enabled: either a bespoke provider validator we can't safely translate,
   # or a path that crosses a list-typed block (needs its own for_each wrapping).
@@ -66,6 +58,9 @@ EOT
   #   source:    [from commonids.ValidateUserAssignedIdentityID] err != nil
   # path: source_resource_id
   #   source:    validation.Any(...) - no translation rule yet, add one
+  # path: topic_type
+  #   condition: length(value) > 0
+  #   message:   must not be empty
   # path: tags
   #   condition: length(value) <= 50
   #   message:   [from tags.Validate: invalid when len(value) > 50]
