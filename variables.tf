@@ -5,10 +5,9 @@ Required:
     - location
     - name
     - resource_group_name
+    - source_resource_id
     - topic_type
 Optional:
-    - source_arm_resource_id
-    - source_resource_id
     - tags
     - identity (block):
         - identity_ids (optional)
@@ -16,13 +15,12 @@ Optional:
 EOT
 
   type = map(object({
-    location               = string
-    name                   = string
-    resource_group_name    = string
-    topic_type             = string
-    source_arm_resource_id = optional(string)
-    source_resource_id     = optional(string)
-    tags                   = optional(map(string))
+    location            = string
+    name                = string
+    resource_group_name = string
+    source_resource_id  = string
+    topic_type          = string
+    tags                = optional(map(string))
     identity = optional(object({
       identity_ids = optional(set(string))
       type         = string
