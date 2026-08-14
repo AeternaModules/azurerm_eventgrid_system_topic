@@ -4,7 +4,7 @@ output "eventgrid_system_topics_id" {
 }
 output "eventgrid_system_topics_identity" {
   description = "Map of identity values across all eventgrid_system_topics, keyed the same as var.eventgrid_system_topics"
-  value       = { for k, v in azurerm_eventgrid_system_topic.eventgrid_system_topics : k => v.identity if v.identity != null && length(v.identity) > 0 }
+  value       = { for k, v in azurerm_eventgrid_system_topic.eventgrid_system_topics : k => one(v.identity) if v.identity != null && length(v.identity) > 0 }
 }
 output "eventgrid_system_topics_location" {
   description = "Map of location values across all eventgrid_system_topics, keyed the same as var.eventgrid_system_topics"
